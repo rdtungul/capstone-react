@@ -33,6 +33,7 @@ function App() {
       </div>
     );
   };
+
   const Header = () => {
     return (
       <div>
@@ -43,6 +44,7 @@ function App() {
       </div>
     );
   };
+
   const Main = () => {
     return (
       <div>
@@ -60,6 +62,7 @@ function App() {
       </div>
     );
   };
+
   const Footer = () => {
     const date = new Date().toString;
     return (
