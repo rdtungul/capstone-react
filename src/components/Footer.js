@@ -1,23 +1,33 @@
+import { Link, Text, VStack, Box } from "@chakra-ui/react";
 import React from "react";
 
 export default function Footer() {
   // automatic update for the footer year
-  const date = new Date();
-  const year = date.getFullYear();
+  const year = new Date().getFullYear();
+
   return (
     <div>
       <footer>
-        <p>
-          &copy; {year}{" "}
-          <a
-            href="https://rdtungul.github.io/"
-            target="_blank"
-            rel="noopener noreferrer"
+        <VStack>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
           >
-            rosephdarl
-          </a>{" "}
-          - Instructor/ Web Developer. Made with ❤ & ☕.
-        </p>
+            <Text>
+              &copy; {year}{" "}
+              <Link
+                href="https://rdtungul.github.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                rosephdarl
+              </Link>{" "}
+              - Instructor/ Web Developer. Made with ❤ & ☕.
+            </Text>
+          </Box>
+        </VStack>
       </footer>
     </div>
   );

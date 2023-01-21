@@ -1,50 +1,22 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+// navigation pages
+import HomePage from "../pages/HomePage";
+import BookingPage from "../pages/BookingPage";
 
-const navLinks = {
-  home: "#home",
-  about: "#about",
-  menu: "#menu",
-  reservations: "#reservations",
-  order: "#order-online",
-  login: "#login",
-};
 export default function Nav() {
   return (
     <div className="navigationContainer">
-      <nav>
-        <ul>
-          <li>
-            <a href={navLinks.home} rel="noopener noreferrer">
-              Home
-            </a>
-          </li>
-          <li>
-            <a href={navLinks.about} rel="noopener noreferrer">
-              About
-            </a>
-          </li>
-          <li>
-            <a href={navLinks.menu} rel="noopener noreferrer">
-              Menu
-            </a>
-          </li>
-          <li>
-            <a href={navLinks.reservations} rel="noopener noreferrer">
-              Reservations
-            </a>
-          </li>
-          <li>
-            <a href={navLinks.order} rel="noopener noreferrer">
-              Order Online
-            </a>
-          </li>
-          <li>
-            <a href={navLinks.login} rel="noopener noreferrer">
-              Login
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <Router>
+        <nav>
+          <Link to="/"> Homepage</Link>
+          <Link to="/booking"> Booking Page</Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/booking" element={<BookingPage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
