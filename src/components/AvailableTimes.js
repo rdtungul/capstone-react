@@ -1,7 +1,6 @@
 import { Select } from "@chakra-ui/react";
 import { useState } from "react";
 
-let nextId = 6;
 const availableTimes = [
   { id: 0, time: "18:00" },
   { id: 1, time: "19:00" },

@@ -7,7 +7,6 @@ import {
   FormErrorMessage,
   Heading,
   Input,
-  Select,
   Button,
   VStack,
   RadioGroup,
@@ -21,7 +20,7 @@ import AvailableTimes from "./AvailableTimes";
 
 export default function BookingForm() {
   // Formik validations
-  const { isLoading, response, submit } = useSubmit();
+  const { response, submit } = useSubmit();
   const { onOpen } = useAlertContext();
 
   const formik = useFormik({
