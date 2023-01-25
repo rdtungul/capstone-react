@@ -15,10 +15,12 @@
 /* 
 ----- All Components Code
 */
-main, footer, .specials {
-  padding: 5% 0;
+.main-content, footer {
+  padding: 5% 150px;
 }
-
+.css-1oqxdqo {
+  padding: 0 !important;
+}
 
 /* 
 ----- Footer Component Style
@@ -53,8 +55,6 @@ footer {
 }
 
 .CTAButton2 {
-  margin: 0 5%;
-  padding: 4% 25% !important;
   background-color: var(--primary-color2) !important;
   color: var(--primary-color3) !important;
   border-radius: 16px !important;
