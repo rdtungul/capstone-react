@@ -7,6 +7,7 @@ import {
   FormErrorMessage,
   Heading,
   Input,
+  Select,
   Button,
   VStack,
   RadioGroup,
@@ -16,12 +17,11 @@ import {
 import * as Yup from "yup";
 import useSubmit from "../hooks/useSubmit";
 import { useAlertContext } from "../context/alertContext";
-// importing availableTimes component
 import AvailableTimes from "./AvailableTimes";
 
 export default function BookingForm() {
   // Formik validations
-  const { response, submit } = useSubmit();
+  const { isLoading, response, submit } = useSubmit();
   const { onOpen } = useAlertContext();
 
   const formik = useFormik({
@@ -36,21 +36,18 @@ export default function BookingForm() {
       if (response.type === "success") {
         formik.resetForm();
       }
-      // console.log(values);
+      console.log(values);
     },
     // Yup configurations
     validationSchema: Yup.object({
       resDate: Yup.string().required("Required"),
-      resTime: Yup.string().required("Required"),
+      // resTime: Yup.string().required("Required"),
       guests: Yup.string().required("Required"),
     }),
   });
 
   // option button will change after click triggers
   const [value, setValue] = useState("birthday");
-
-  // adding useState on the form value availableTimes
-  const [resTime1, setResTime1] = useState("");
 
   return (
     <div>
@@ -74,15 +71,8 @@ export default function BookingForm() {
             </FormErrorMessage>
           </FormControl>
 
-          <FormControl
-            isInvalid={!!formik.errors.resDate && formik.touched.resDate}
-          >
-            <FormLabel htmlFor="res-date">Number of guests:</FormLabel>
-            <AvailableTimes onChange={setResTime1} resTime1={resTime1} />
-            <FormErrorMessage marginBottom={5}>
-              {formik.errors.resDate}
-            </FormErrorMessage>
-          </FormControl>
+          <FormLabel htmlFor="res-time">Choose time:</FormLabel>
+          <AvailableTimes />
 
           <FormControl
             isInvalid={!!formik.errors.guests && formik.touched.guests}
