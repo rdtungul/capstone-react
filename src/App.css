@@ -1,73 +1,254 @@
 :root {
+  /* Primary Heading */
+  --primary-heading: 'Markazi Text', serif;
+  /* Secondary Heading */
+  --secondary-heading: 'Karla', sans-serif;
   /* Primary colors */
   --primary-color1: #495E57;
   --primary-color2: #F4CE14;
   --primary-color3: #000000;
   --primary-color4: #FFFFFF;
+  --heading-text: 76px;
+  --subheading-text: 42px;
   /* Secondary colors */
   --secondary-color1: #EE9972;
   --secondary-color2: #FBDABB;
   --secondary-color3: #EDEFEE;
   --secondary-color4: #333333;
-
+  --border-radius: 16px;
+  --border-radius-form: 6px;
 }
+
+/* CSS Utilities */
+.d-flex {
+  display: flex;
+}
+.d-flex-rm {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.space-between {
+  justify-content: space-between;
+}
+.space-around {
+  justify-content: space-around;
+}
+.space-evenly {
+  justify-content: space-evenly;
+}
+.align-items-center {
+  align-items: center;
+}
+.d-inline {
+  display: inline;
+}
+.d-inline-block {
+  display: inline-block;
+}
+.text-align-center {
+  text-align: center;
+}
+.text-align-left {
+  text-align: left;
+}
+
+
 
 /* 
 ----- All Components Code
 */
-.main-content, footer {
-  padding: 5% 150px;
+body {
+  /* padding: 1% 15%; */
+  font-family: var(--secondary-heading);
+  font-size: 18px;
 }
-.css-1oqxdqo {
-  padding: 0 !important;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--primary-heading);
 }
 
-/* 
------ Footer Component Style
+.Booking {
+  padding: 10% 0;
+}
+.Heading {
+  font-size: var(--heading-text);
+}
+.Subheading {
+  font-size: var(--subheading-text);
+}
+.Header, .Footer {
+  background-color: var(--primary-color4);
+}
+
+main, .Home {
+  background-color: var(--primary-color1);
+}
+.Header {
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+header {
+  padding-left: 15%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+nav {
+  padding-right: 15%;
+}
+
+.HomePage {
+  padding: 5% 15% !important;
+}
+
+/* =====
+===== Home Page Style
 */
-
-footer {
-  background-color: var(--secondary-color3);
-  color: var(--secondary-color4);
+.HomePage, .BookingPage {
+  background-color: var(--primary-color1);
+  padding: 4% 0;
+  width: 100%;
 }
-.footer-link {
-  color: var(--secondary-color4);
+.HomePage--Heading {
+  color: var(--primary-color2);
+  line-height: 50px;
+  margin: 0 auto;
+}
+.HomePage--Subheading, .HomePage--p, .Booking--Subheading, .BookingForm {
+  color: var(--primary-color4);
+}
+
+.HomePage--p {
+  padding-right: 20%;
+  line-height: 30px;
+  margin-bottom: 60px;
+}
+.HomePage--Img {
+  width: 100%;
+}
+.row {
+  width: 100%;
+}
+
+/* =====
+===== CSS Navigation Style
+*/
+nav > a {
+  text-decoration: none;
+  color: var(--primary-color3);
+  padding-left: 10px;
+}
+nav > a:hover {
+  color: var(--primary-color1);
+}
+
+/* =====
+===== CTA Button Style
+*/
+.CTA, .CTA2, .form--submit {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 20px 40px;
+  margin-top: 30px !important;
+  border-radius: var(--border-radius);
   text-decoration: none;
 }
-.footer-link:hover {
-  color: var(--primary-color2);
-  text-decoration: none !important;
+.CTA {
+  color: var(--primary-color4);
+  background-color: var(--primary-color3);
+}
+.CTA:hover {
+  color: var(--primary-color3);
+  background-color: var(--primary-color2);
+  border-color: var(--primary-color2);
 }
 
-/* 
-===== CTA Button Component Style
+
+.CTA2, .form--submit {
+  color: var(--primary-color3);
+  background-color: var(--primary-color2);
+  border-color: var(--primary-color2);
+}
+.CTA2:hover, .form--submit:hover {
+  color: var(--primary-color4);
+  background-color: var(--primary-color3);
+  border-color: var(--primary-color3);
+}
+
+
+
+/* =====
+===== CSS Footer Style
 */
-.CTAButton {
-  margin: 5% 0;
-  padding: 4% 5% !important;
-  background-color: var(--primary-color3) !important;
-  color: var(--primary-color4) !important;
-  border-radius: 16px !important;
+.Footer {
+  padding: 2% 0;
 }
-.CTAButton:hover {
-  background-color: var(--primary-color2) !important;
-  color: var(--primary-color3) !important;
+.Footer a {
+  text-decoration: none;
+  color: var(--primary-color3);
 }
-
-.CTAButton2 {
-  background-color: var(--primary-color2) !important;
-  color: var(--primary-color3) !important;
-  border-radius: 16px !important;
-}
-.CTAButton2:hover {
-  background-color: var(--primary-color3) !important;
-  color: var(--primary-color4) !important;
+.Footer a:hover {
+  color: var(--primary-color1);
 }
 
 
-/*
------ Specials Component Code
+/* =====
+===== Specials Page Style
 */
-.specials {
-  background-color: var(--primary-color4);
+.Specials, .Booking {
+  width: 100%;
+  padding: 3% 15%;
+}
+.Specials--card-row {
+  column-gap: 50px;
+}
+.Specials--card-col {
+  padding: 5%;
+  background-color: var(--secondary-color3);
+  border-radius: 6px;
+}
+.card-img {
+  width: 100%;
+  margin-bottom: 3%;
+}
+h3 {
+  font-family: var(--secondary-heading);
+}
+.card-title--price {
+  color: var(--secondary-color1);
+}
+.card-descriptions {
+  margin-bottom: 15%;
+}
+.card--add-cart {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--primary-color1);
+  column-gap: 10px;
+}
+.card--cart-icon {
+  width: 50%;
+}
+
+form input, form select {
+  margin: 5px 0 0 !important;
+  font-size: 18px;
+;
+}
+.BookingForm--text {
+  background-color: var(--secondary-color3);
+  border-color: var(--secondary-color3);
+  border-radius: var(--border-radius-form);
+  text-indent: 10px;
+  width: 15%;
+  height: 40px;
+}
+.BookingForm--radio {
+  height: 30%;
+}
+
+.booking-form--error {
+color: var(--secondary-color1);
 }

@@ -1,112 +1,186 @@
 import React, { useState } from "react";
-// importing Formik for automation of the Booking form
-import { useFormik } from "formik";
-import {
-  FormLabel,
-  FormControl,
-  FormErrorMessage,
-  Heading,
-  Input,
-  Button,
-  VStack,
-  RadioGroup,
-  Radio,
-  Stack,
-} from "@chakra-ui/react";
-import * as Yup from "yup";
-import useSubmit from "../hooks/useSubmit";
-import { useAlertContext } from "../context/alertContext";
-import AvailableTimes from "./AvailableTimes";
 
 export default function BookingForm() {
-  // Formik validations
-  const { response, submit } = useSubmit();
-  const { onOpen } = useAlertContext();
+  // available times array
+  const [availableTimes, setAvailableTimes] = useState([
+    "",
+    "17:00",
+    "18:00",
+    "19:00",
+    "20:00",
+    "21:00",
+  ]);
 
-  const formik = useFormik({
-    initialValues: {
+  //   adding a form state for inputting data
+  const [formInput, setFormInput] = useState({
+    resDate: "",
+    resTime: "",
+    resGuest: "",
+    occasion: "",
+    errors: {
       resDate: "",
       resTime: "",
-      guests: "",
+      resGuest: "",
+      occasion: "",
     },
-    onSubmit: (values) => {
-      submit("/api/booked", values);
-      onOpen(response.type, response.message);
-      if (response.type === "success") {
-        formik.resetForm();
-      }
-      console.log(values);
-    },
-    // Yup configurations
-    validationSchema: Yup.object({
-      resDate: Yup.string().required("Required"),
-      // resTime: Yup.string().required("Required"),
-      guests: Yup.string().required("Required"),
-    }),
   });
 
-  // option button will change after click triggers
-  const [value, setValue] = useState("birthday");
+  // adding change event function for the inputted value for entering inputs
+  function handleChange(e) {
+    setFormInput({
+      ...formInput,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  // adding function blur for the input field selection
+  function handleBlur(e) {
+    const { name, value } = e.target;
+    const errors = formInput.errors;
+
+    if (name === "resDate") {
+      errors.resDate = value ? "" : "Booking Date is required";
+    }
+    if (name === "resTime") {
+      errors.resTime = value ? "" : "Booking Time is required";
+    }
+    if (name === "resGuest") {
+      errors.resGuest = value ? "" : "Number of Guest(s) is required";
+    }
+    setFormInput({
+      ...formInput,
+      errors,
+    });
+  }
+
+  // function to clear all the fields
+  function clearForm() {
+    setFormInput({
+      resDate: "",
+      resTime: "",
+      resGuest: "",
+      occasion: "",
+      errors: {
+        resDate: "",
+        resTime: "",
+        resGuest: "",
+        occasion: "",
+      },
+    });
+  }
+
+  // function for the submit handler
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (
+      !formInput.resDate ||
+      !formInput.resTime ||
+      !formInput.resGuest ||
+      !formInput.occasion
+    ) {
+      alert("Please fill in the required fields");
+    } else {
+      // Do something with the form data here
+      console.log(formInput);
+      clearForm();
+    }
+  }
 
   return (
-    <div>
-      <VStack paddingY={50} backgroundColor="#FBDABB">
-        <Heading as="h1" marginBottom={25}>
-          Booking Form
-        </Heading>
-        <form onSubmit={formik.handleSubmit}>
-          <FormControl
-            isInvalid={!!formik.errors.resDate && formik.touched.resDate}
-          >
-            <FormLabel htmlFor="res-date">Number of guests:</FormLabel>
-            <Input
-              type="date"
-              name="resDate"
-              id="res-date"
-              {...formik.getFieldProps("resDate")}
-            />
-            <FormErrorMessage marginBottom={5}>
-              {formik.errors.resDate}
-            </FormErrorMessage>
-          </FormControl>
-
-          <FormLabel htmlFor="res-time">Choose time:</FormLabel>
-          <AvailableTimes />
-
-          <FormControl
-            isInvalid={!!formik.errors.guests && formik.touched.guests}
-          >
-            <FormLabel htmlFor="guests">Number of guests:</FormLabel>
-            <Input
-              type="number"
-              name="guests"
-              id="guests"
-              min={1}
-              {...formik.getFieldProps("guests")}
-            />
-            <FormErrorMessage marginBottom={5}>
-              {formik.errors.guests}
-            </FormErrorMessage>
-          </FormControl>
-
-          <FormLabel htmlFor="occasion">Occasion:</FormLabel>
-          <RadioGroup
-            id="occasion"
-            onChange={setValue}
-            value={value}
-            marginBottom={5}
-          >
-            <Stack direction="row">
-              <Radio value="birthday">Birthday</Radio>
-              <Radio value="anniversary">Anniversary</Radio>
-            </Stack>
-          </RadioGroup>
-
-          <Button type="submit" marginTop={25}>
-            Make Your Reservation
-          </Button>
-        </form>
-      </VStack>
+    <div className="BookingForm">
+      <form onSubmit={handleSubmit}>
+        Choose Date
+        <label htmlFor="res-date"></label>
+        <br />
+        <input
+          type="date"
+          className="BookingForm--inputs BookingForm--text"
+          id="res-date"
+          name="resDate"
+          value={formInput.resDate}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          min={new Date().toISOString().substring(0, 10)}
+        />
+        {formInput.errors.resDate && (
+          <p className="booking-form--error">{formInput.errors.resDate}</p>
+        )}
+        <br />
+        <br />
+        <label htmlFor="res-time">Choose time</label>
+        <br />
+        <select
+          id="res-time"
+          onChange={handleChange}
+          value={formInput.resTime}
+          onBlur={handleBlur}
+          name="resTime"
+          className="BookingForm--inputs BookingForm--text"
+        >
+          {availableTimes.map((time, index) => (
+            <option key={index} value={time}>
+              {time}
+            </option>
+          ))}
+        </select>
+        {formInput.errors.resTime && (
+          <p className="booking-form--error">{formInput.errors.resTime}</p>
+        )}
+        <br />
+        <br />
+        <label htmlFor="guests">Number of guests</label>
+        <br />
+        <input
+          type="number"
+          className="BookingForm--inputs BookingForm--text"
+          placeholder="1"
+          min="1"
+          max="10"
+          id="guests"
+          name="resGuest"
+          value={formInput.resGuest}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        {formInput.errors.resGuest && (
+          <p className="booking-form--error">{formInput.errors.resGuest}</p>
+        )}
+        <br />
+        <br />
+        <label htmlFor="occasion">Occasion</label>
+        <br />
+        <input
+          type="radio"
+          id="birthday"
+          name="occasion"
+          className="BookingForm--inputs BookingForm--radio"
+          value="birthday"
+          checked={formInput.occasion === "birthday"}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        <label htmlFor="birthday"> Birthday</label> &nbsp;
+        <input
+          type="radio"
+          id="anniversary"
+          name="occasion"
+          className="BookingForm--inputs BookingForm--radio"
+          value="anniversary"
+          checked={formInput.occasion === "anniversary"}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        <label htmlFor="anniversary"> Anniversary</label>
+        {formInput.errors.occasion && <div>{formInput.errors.occasion}</div>}
+        <br />
+        <br />
+        <input
+          type="submit"
+          value="Make Your reservation"
+          className="form--submit"
+        />
+      </form>
     </div>
   );
 }

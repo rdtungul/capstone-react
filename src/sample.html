@@ -1,1 +1,126 @@
-<img src="" alt="">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            padding: 0 !important;
+
+            width: 100vw;
+            height: 100vh;
+            font-size: 18px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 50px 1fr 1fr 100px;
+            gap: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+
+            background-color: green;
+
+            /* display: contents; */
+            /* align-items: center; */
+            justify-content: center;
+        }
+
+        .container div {
+            padding: 10px;
+            border: 1px solid #000;
+        }
+
+        .header,
+        .footer {
+            grid-column-start: 1;
+            grid-column-end: 4;
+            background-color: #fff;
+        }
+
+        .content-large {
+            grid-row-start: 2;
+            grid-row-end: span 2;
+            background-color: #eee;
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+
+        nav li,
+        .footer {
+            display: inline;
+            padding: 2%;
+        }
+
+
+        @media screen and (max-width: 600px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0;
+
+            }
+
+            .container div {
+                padding: 10px;
+                border: none;
+            }
+
+            .content-large {
+                grid-row-start: 2;
+                grid-row-end: span 1;
+                grid-column-start: 1;
+                grid-column-end: 4;
+            }
+
+            .content-medium {
+                grid-row-start: 3;
+                grid-column-start: 2;
+                grid-column-end: 2;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul>
+                    <li>Home</li>
+                    <li>Services</li>
+                    <li>Blog</li>
+                    <li>About</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="main content-large">
+            <h1>Homepage</h1>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto maxime eaque quam dolor illo eos sunt
+            ipsa? Praesentium, quisquam libero. Laudantium maxime asperiores quibusdam nemo itaque tenetur veritatis
+            labore deleniti?
+        </div>
+        <div class="sidebar1 content-small">
+            <h2>Sidebar1</h2>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </div>
+        <div class="sidebar2 content-small">
+            <h2>Sidebar2</h2>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </div>
+        <div class="footer">Copyright &copy; 2023. rosephdarl - Instructor/ Web Developer.</div>
+    </div>
+</body>
+
+</html>

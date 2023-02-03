@@ -1,4 +1,3 @@
-import { Link, Text, VStack, Box } from "@chakra-ui/react";
 import React from "react";
 
 export default function Footer() {
@@ -6,28 +5,20 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <div>
+    <div className="Footer text-align-center">
       <footer>
-        <VStack>
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
+        <p>
+          &copy; {year}{" "}
+          <a
+            href="https://rdtungul.github.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-link"
           >
-            <Text>
-              &copy; {year}{" "}
-              <Link
-                href="https://rdtungul.github.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link"
-              >
-                rosephdarl
-              </Link>{" "}
-              - Instructor/ Web Developer. Made with ❤ & ☕.
-            </Text>
-          </Box>
-        </VStack>
+            rosephdarl
+          </a>{" "}
+          - Instructor/ Web Developer. Made with ❤ & ☕.
+        </p>
       </footer>
     </div>
   );

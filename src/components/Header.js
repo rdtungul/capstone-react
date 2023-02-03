@@ -1,22 +1,35 @@
 import React from "react";
-// importing logo for header
-import headerLogo from "../Logo.svg";
-import Nav from "./Nav";
-import { VStack } from "@chakra-ui/react";
+import "../App.css";
+// importing header logo
+import HeaderLogo from "../Logo.svg";
+// importing router navigation using react-router-dom dependencies
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+// importing components
+import BookingPage from "../pages/BookingPage";
+import HomePage from "./HomePage";
 
 export default function Header() {
   return (
-    <div>
+    <div className="Header d-flex flex-wrap space-between align-items-center">
       <header>
-        <VStack
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-        >
-          <img className="headerImage" src={headerLogo} alt="logo" />
-        </VStack>
-        <Nav />
+        <img src={HeaderLogo} alt="Header Logo" />
       </header>
+
+      <Router>
+        <nav>
+          <Link to="/capstone-react">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/menu">Menu</Link>
+          <Link to="/reservation">Reservations</Link>
+          <Link to="/order-online">Order Online</Link>
+          <Link to="/login">Login</Link>
+        </nav>
+
+        <Routes>
+          <Route path="/capstone-react" element={<HomePage />} />
+          <Route path="/reservation" element={<BookingPage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
